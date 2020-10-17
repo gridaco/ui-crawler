@@ -8,7 +8,7 @@ from time import sleep
 import warnings
 from selenium.webdriver.support import expected_conditions as ec
 from urllib.parse import urljoin, urlparse, parse_qs
-from mobbin_crawler.mobbin_scrapy.models import MobbinImageModel
+from mobbin_crawler.models import MobbinImageModel
 from email.message import Message
 
 

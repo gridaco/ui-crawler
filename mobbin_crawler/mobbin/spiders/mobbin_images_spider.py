@@ -5,9 +5,9 @@ from selenium import webdriver, common
 from selenium.webdriver import ChromeOptions
 from time import sleep
 
-from mobbin_crawler.mobbin_scrapy.mobbin.items import MobbinItem
-from mobbin_crawler.mobbin_scrapy.mobbin.settings import IMAGES_STORE, BASE_DATA_PATH
-from mobbin_crawler.mobbin_scrapy.mobbin_handler import MobbinHandle
+from mobbin_crawler.mobbin.items import MobbinItem
+from mobbin_crawler.mobbin.settings import IMAGES_STORE, BASE_DATA_PATH
+from mobbin_crawler.mobbin_handler import MobbinHandle
 
 MOBBIN_DATA_SOURCE = BASE_DATA_PATH.joinpath("mobbin")
 

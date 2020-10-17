@@ -7,10 +7,16 @@ Scrapy project
 
 
 ## Run this spider
+```shell script
+cd ./mobbin_crawler
+export PYTHONPATH='.'
 
-> cd ./mobbin_crawler/moibbin_scrapy/
+python mobbin/spiders/mobbin_images_spider.py
 
-> scrapy crawl mobbin_images_spider
+# .. or, if the scrapy is well set
+# scrapy crawl mobbin_images_spider
+```
+
 
 
 # Approach
