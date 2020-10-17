@@ -1,0 +1,1 @@
+## Mobbin.design crawled data directory. leave this directory empty for git.
