@@ -1,4 +1,5 @@
-# bridged (private) ui crawler
+# ui crawler
+> ui crawler, a scapy based ui images data downloader from various places. (PLEASE NOTE THE DISCLAIMER)
 
 
 ## sorce: mobbin.design
