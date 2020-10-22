@@ -40,35 +40,40 @@ class MobbinImagesSpiderSpider(scrapy.Spider):
             print("currIndex :: ", str(curr_index))
             result = self.mobbin_handle.get_n_screen_div(curr_index)
             if result["success"] is True:
-                curr_index += 1
-                try:
-                    # Enter Detail page by clicking item
-                    result["value"].click()
-                    sleep(0.1)
+                if curr_index%1000 == 0:
+                    self.driver.refresh()
+                    print("Refreshing the browser")
+                    curr_index += 1
+                else:
+                    curr_index += 1
+                    try:
+                        # Enter Detail page by clicking item
+                        result["value"].click()
+                        sleep(0.1)
 
-                    # Parse data from detail page
-                    data = self.mobbin_handle.parse_detail()
+                        # Parse data from detail page
+                        data = self.mobbin_handle.parse_detail()
 
-                    item = MobbinItem()
-                    item["url"] = data.url
-                    item["app_name"] = data.app
-                    item["app_desc"] = data.app_desc
-                    item["app_url"] = data.app_url
-                    item["category"] = data.category
-                    item["mobbin_patterns"] = data.mobbin_patterns
-                    item["mobbin_elements"] = data.mobbin_elements
-                    item["image_urls"] = [data.file_url]
-                    yield item
+                        item = MobbinItem()
+                        item["url"] = data.url
+                        item["app_name"] = data.app
+                        item["app_desc"] = data.app_desc
+                        item["app_url"] = data.app_url
+                        item["category"] = data.category
+                        item["mobbin_patterns"] = data.mobbin_patterns
+                        item["mobbin_elements"] = data.mobbin_elements
+                        item["image_urls"] = [data.file_url]
+                        yield item
 
-                    # Exit Detail page by clicking 'X' button
-                    close_detail_button = self.driver.find_element_by_xpath(
-                        "//button[@class='sc-erNlkL kveGTq sc-jzJRlG hvBLru']")
-                    close_detail_button.click()
-                    print("Close")
-                    sleep(0.1)
-                except common.exceptions.WebDriverException as e:
-                    print(e)
-                    yield
+                        # Exit Detail page by clicking 'X' button
+                        close_detail_button = self.driver.find_element_by_xpath(
+                            "//button[@class='sc-erNlkL kveGTq sc-jzJRlG hvBLru']")
+                        close_detail_button.click()
+                        print("Close")
+                        sleep(0.1)
+                    except common.exceptions.WebDriverException as e:
+                        print(e)
+                        yield
             else:
                 print("Failed. Need to scroll down")
                 # Control when to scroll

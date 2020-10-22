@@ -72,7 +72,7 @@ ITEM_PIPELINES = {
 }
 
 DIR: pathlib.PurePath = pathlib.Path(__file__).parent
-BASE_DATA_PATH = DIR.joinpath("../../../data")
+BASE_DATA_PATH = DIR.joinpath("../../data")
 # Image store location
 IMAGES_STORE = BASE_DATA_PATH.joinpath("./images").as_posix()
 
