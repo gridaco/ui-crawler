@@ -40,7 +40,12 @@ class MobbinImagesSpiderSpider(scrapy.Spider):
             print("currIndex :: ", str(curr_index))
             result = self.mobbin_handle.get_n_screen_div(curr_index)
             if result["success"] is True:
-                curr_index += 1
+                if curr_index%1000 == 0:
+                    self.driver.refresh()
+                    print("Refreshing the browser")
+                    curr_index += 1
+                else:
+                    curr_index += 1
                 try:
                     # Enter Detail page by clicking item
                     result["value"].click()
