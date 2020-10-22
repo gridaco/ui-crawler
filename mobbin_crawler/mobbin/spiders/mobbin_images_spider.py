@@ -35,17 +35,22 @@ class MobbinImagesSpiderSpider(scrapy.Spider):
     def parse(self, response):
         self.driver.get(response.url)
         curr_index = 0
+        refresh_index = 0
         # Infinite scrolling
         while True:
-            print("currIndex :: ", str(curr_index))
+            if refresh_index % 500 == 0:
+                print("Refreshing the browser", str(refresh_index))
+                self.driver.refresh()
+                sleep(0.1)
+                refresh_index += 1
+                print("currIndex :: ", str(curr_index))
+            else:
+                refresh_index += 1
+                print("currIndex :: ", str(curr_index))
+
             result = self.mobbin_handle.get_n_screen_div(curr_index)
             if result["success"] is True:
-                if curr_index%1000 == 0:
-                    self.driver.refresh()
-                    print("Refreshing the browser")
-                    curr_index += 1
-                else:
-                    curr_index += 1
+                curr_index += 1
                 try:
                     # Enter Detail page by clicking item
                     result["value"].click()
