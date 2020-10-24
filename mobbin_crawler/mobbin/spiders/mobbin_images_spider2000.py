@@ -16,10 +16,10 @@ class MobbinImagesSpiderSpider(scrapy.Spider):
     allowed_domains = ['mobbin.design']
     start_urls = ['https://mobbin.design/patterns']
 
-    custom_settings = {
-        "ITEM_PIPELINES": {'scrapy.pipelines.images.ImagesPipeline': 1},
-        "IMAGES_STORE": MOBBIN_DATA_SOURCE.as_posix()
-    }
+    # custom_settings = {
+    #     "ITEM_PIPELINES": {'scrapy.pipelines.images.ImagesPipeline': 1},
+    #     "IMAGES_STORE": MOBBIN_DATA_SOURCE.as_posix()
+    # }
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -34,9 +34,9 @@ class MobbinImagesSpiderSpider(scrapy.Spider):
 
     def parse(self, response):
         self.driver.get(response.url)
-        curr_index = 0
+        curr_index = 1001
         # Infinite scrolling
-        while True and curr_index <= 1000:
+        while True and curr_index <= 2000:
             print("currIndex : ", str(curr_index))
             result = self.mobbin_handle.get_n_screen_div(curr_index)
             if result["success"] is True:
@@ -83,7 +83,7 @@ if __name__ == '__main__':
     process = CrawlerProcess({
         'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
         'FEED_FORMAT': 'json',
-        'FEED_URI': MOBBIN_DATA_SOURCE.joinpath("data.json").as_posix()
+        'FEED_URI': MOBBIN_DATA_SOURCE.joinpath("data2000.json").as_posix()
     })
 
     process.crawl(MobbinImagesSpiderSpider)
